@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 
 interface ContentBlock {
   type: "text" | "image";
@@ -83,7 +83,7 @@ function Page() {
   };
 
   // Handle Reordering
-  const onDragEnd = (result: any, type: "content" | "articles") => {
+  const onDragEnd = (result: DropResult<string>, type: "content" | "articles") => {
     if (!result.destination) return;
 
     if (type === "content") {

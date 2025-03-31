@@ -1,6 +1,3 @@
-import Layout from "@/components/Layout/Layout";
-import Image from "next/image";
-
 export default function Home() {
   return (
     <div className="flex gap-5 min-h-screen">
