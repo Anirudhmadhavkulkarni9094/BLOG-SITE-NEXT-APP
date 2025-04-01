@@ -1,0 +1,6 @@
+[
+    { "title": "Introduction to Next.js", "link": "/blog/nextjs-intro" },
+    { "title": "Understanding MongoDB", "link": "/blog/mongodb-guide" },
+    { "title": "How to Use Tailwind CSS", "link": "/blog/tailwind-css" },
+    { "title": "Deploying to Vercel", "link": "/blog/vercel-deploy" }
+  ]
