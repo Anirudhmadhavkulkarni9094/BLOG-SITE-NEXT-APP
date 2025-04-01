@@ -268,7 +268,7 @@ function Page() {
         </div>
         <div>
             <label htmlFor="Category">Category name</label>
-            <input placeholder="Enter Category" onClick={(e:any)=>{setCategory(e.target.value)}} className="border p-2 rounded-md w-full focus:ring-2 focus:ring-blue-400"></input>
+            <input placeholder="Enter Category" onChange={(e)=>{setCategory(e.target.value)}} className="border p-2 rounded-md w-full focus:ring-2 focus:ring-blue-400"></input>
         </div>
         <div>
           <label className="text-sm font-medium">🔗 Related Articles</label>

@@ -1,4 +1,3 @@
-import Layout from '@/components/Layout/Layout'
 import Sidebar from '@/components/UiComponent/Sidebar/Sidebar'
 import React from 'react'
 
