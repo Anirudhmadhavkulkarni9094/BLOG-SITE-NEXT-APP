@@ -2,7 +2,15 @@
 import { fetchPosts } from "@/function/post/getServerSideProps";
 import { Metadata } from "next";
 import Image from "next/image";
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
+
+interface Post {
+  _id: string;
+  title: string;
+  createdAt: string;
+  author?: string;
+  category?: string;
+  featuredImage?: string;
+}
 
 // 🔄 Revalidate every 60 seconds (ISR)
 export const revalidate = 60;
@@ -13,16 +21,14 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Latest Blogs | My Blog",
     description: "Read the latest blogs on technology, business, and more!",
     openGraph: {
-      title: "Latest Blogs | My Blog",
       description: "Explore top articles on tech, business, and lifestyle.",
       type: "website",
-      url: "https://myblog.com/blogs",
     },
   };
 }
 
 export default async function BlogPage() {
-  const posts = await fetchPosts(); // Fetch blogs at build time (SEO-friendly)
+  const posts:Post[] = await fetchPosts(); // Fetch blogs at build time (SEO-friendly)
   console.log(posts);
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -48,7 +54,7 @@ export default async function BlogPage() {
       {posts.length === 0 ? (
         <p className="text-center text-gray-500 col-span-full">No posts found.</p>
       ) : (
-        posts.map((post: { _id: Key | null | undefined; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; createdAt: string | number | Date; author: any; category: any; }) => (
+        posts.map((post:Post) => (
           <div
             key={post._id}
             className="border rounded-lg overflow-hidden shadow-md transition hover:shadow-lg bg-white"
