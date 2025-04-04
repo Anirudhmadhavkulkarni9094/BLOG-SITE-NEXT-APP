@@ -56,3 +56,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+export async function GET() {
+  try {
+    await connectDB();
+    const blogs = await Blog.find().sort({ createdAt: -1 });
+    console.log(blogs)
+
+    return NextResponse.json({ blogs }, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
