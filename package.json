@@ -11,10 +11,14 @@
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
     "@vercel/blob": "^0.27.3",
+    "axios": "^1.8.4",
     "cms-blog-site": "file:",
+    "dotenv": "^16.4.7",
+    "mongoose": "^8.13.1",
     "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-toastify": "^11.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

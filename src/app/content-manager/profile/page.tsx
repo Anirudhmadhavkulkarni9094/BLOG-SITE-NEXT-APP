@@ -1,11 +1,8 @@
-/* eslint-disable */
 import React from 'react'
 
 function page() {
   return (
-    <div className='flex min-h-screen'>
-      
-    </div>
+    <div>page</div>
   )
 }
 
