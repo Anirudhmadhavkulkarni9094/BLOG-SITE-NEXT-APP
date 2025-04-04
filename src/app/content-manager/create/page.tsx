@@ -1,10 +1,14 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { upload } from "@vercel/blob/client";
 
 interface ContentBlock {
   type: "CoreParagraph" | "CoreImage";
-  value: string;
+  content: string;
 }
 
 interface Article {
@@ -15,7 +19,7 @@ interface Article {
 function Page() {
   const [content, setContent] = useState<ContentBlock[]>([]);
   const [title, setTitle] = useState<string>("");
-
+  const router = useRouter();
   const [articles, setArticles] = useState<Article[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
@@ -37,16 +41,63 @@ function Page() {
     }
     fetchArticles();
   }, []);
-  const handleSavePost = () => {
+  const handleSavePost = async () => {
+    let updatedContent = [...content];
+  
+    // Upload images before saving the blog
+    const uploadImage = async (base64: string) => {
+      const blob = await fetch(base64);
+      const file = await blob.blob();
+  
+      const formData = new FormData();
+      formData.append("file", file);
+  
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const data = await response.json();
+      return data.url; // Return uploaded image URL
+    };
+  
+    // Process image uploads
+    updatedContent = await Promise.all(
+      content.map(async (block) => {
+        if (block.type === "CoreImage" && block.content.startsWith("data:image")) {
+          const imageUrl = await uploadImage(block.content);
+          return { ...block, content: imageUrl };
+        }
+        return block;
+      })
+    );
+  
     const post = {
       title,
       category,
       featuredImage,
-      content,
-      selectedArticles,
+      content: updatedContent,
+      relatedArticle: selectedArticles,
     };
-    console.log("Saved Post:", post);
+  
+    try {
+      const { data } = await axios.post("/api/blog", post, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    
+      toast.success("Post saved successfully!");
+      router.push("/content-manager/posts");
+      console.log("Post saved successfully:", data);
+    
+    } catch (error:any) {
+      console.error("Error saving post:", error.response?.data || error.message);
+      toast.error("Failed to save post!");
+    }
   };
+  
+  
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -110,14 +161,27 @@ function Page() {
   };
   const [featuredImage, setFeaturedImage] = useState<string | null>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setFeaturedImage(reader.result as string);
-      reader.readAsDataURL(file);
+    if (!file) return;
+  
+    const formData = new FormData();
+    formData.append("file", file);
+  
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const data = await response.json();
+      setFeaturedImage(data.url);
+      console.log("Image uploaded successfully:", data.url);
+    } catch (err) {
+      console.error("Error uploading featured image:", err);
     }
   };
+  
 
   return (
     <div className="p-6 flex gap-10">
@@ -159,10 +223,10 @@ function Page() {
                           <textarea
                             className="w-full p-2 rounded-md border focus:ring-2 focus:ring-blue-400"
                             placeholder="Enter text here..."
-                            value={block.value}
+                            value={block.content}
                             onChange={(e) => {
                               const updatedContent = [...content];
-                              updatedContent[index].value = e.target.value;
+                              updatedContent[index].content = e.target.value;
                               setContent(updatedContent);
                             }}
                             autoFocus
@@ -179,7 +243,7 @@ function Page() {
                                   const reader = new FileReader();
                                   reader.onloadend = () => {
                                     const updatedContent = [...content];
-                                    updatedContent[index].value =
+                                    updatedContent[index].content =
                                       reader.result as string;
                                     setContent(updatedContent);
                                   };
@@ -187,9 +251,9 @@ function Page() {
                                 }
                               }}
                             />
-                            {block.value && (
+                            {block.content && (
                               <img
-                                src={block.value}
+                                src={block.content}
                                 alt="Uploaded Preview"
                                 className="mt-2 rounded-md w-48"
                               />
@@ -209,7 +273,7 @@ function Page() {
         <div className="mt-4 flex gap-2">
           <button
             onClick={() =>
-              setContent([...content, { type: "CoreParagraph", value: "" }])
+              setContent([...content, { type: "CoreParagraph", content: "" }])
             }
             className="bg-blue-500 text-white p-2 rounded-md cursor-pointer hover:bg-blue-600"
           >
@@ -217,7 +281,7 @@ function Page() {
           </button>
           <button
             onClick={() =>
-              setContent([...content, { type: "CoreImage", value: "" }])
+              setContent([...content, { type: "CoreImage", content: "" }])
             }
             className="bg-green-500 text-white p-2 rounded-md cursor-pointer hover:bg-green-600"
           >
