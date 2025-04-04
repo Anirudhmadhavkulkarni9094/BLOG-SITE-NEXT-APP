@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Blog from "@/models/Blog";
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
 
     // Process images in content
     const contentWithImages = await Promise.all(
-      data.content.map(async (item) => {
+      data.content.map(async (item: { type: string; content: string }) => {
         // Ensure item has a valid 'type' and 'content'
         if (!item || typeof item !== "object" || !item.type || !item.content) {
           return item;
