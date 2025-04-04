@@ -1,4 +1,4 @@
-import Sidebar from '@/components/UiComponent/Sidebar/Sidebar'
+/* eslint-disable */
 import React from 'react'
 
 function page() {

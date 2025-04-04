@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "@/components/Navbar/Navbar";
 import Sidebar from "@/components/UiComponent/Sidebar/Sidebar";
 import { ToastContainer } from "react-toastify";
 
