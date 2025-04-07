@@ -14,6 +14,7 @@
     "axios": "^1.8.4",
     "cms-blog-site": "file:",
     "dotenv": "^16.4.7",
+    "lucide-react": "^0.487.0",
     "mongoose": "^8.13.1",
     "next": "15.2.4",
     "react": "^19.0.0",
