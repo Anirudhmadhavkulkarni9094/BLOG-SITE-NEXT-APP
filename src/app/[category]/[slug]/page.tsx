@@ -29,8 +29,8 @@ interface Blog {
   createdAt: string;
 }
 
-export default function Page(promiseProps: { params: Promise<{ category: string , slug : string }> }) {
-  const { category , slug } = use(promiseProps.params);
+export default function Page(promiseProps: { params: Promise<{  slug : string }> }) {
+  const {  slug } = use(promiseProps.params);
 
   const [data, setData] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
