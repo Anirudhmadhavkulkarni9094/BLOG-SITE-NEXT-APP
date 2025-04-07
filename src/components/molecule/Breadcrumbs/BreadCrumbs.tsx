@@ -17,7 +17,7 @@ function BreadCrumbs() {
   });
 
   return (
-    <nav className="w-full text-sm m-6 p-5" aria-label="Breadcrumb">
+    <nav className="w-full text-sm p-5" aria-label="Breadcrumb">
       <ol className="flex flex-wrap items-center gap-1 text-gray-500">
         <li>
           <Link

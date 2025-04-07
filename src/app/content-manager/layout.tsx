@@ -1,6 +1,6 @@
+import Sidebar from "@/components/molecule/Sidebar/Sidebar";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Sidebar from "@/components/UiComponent/Sidebar/Sidebar";
 import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({

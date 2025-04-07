@@ -9,6 +9,7 @@ import CoreParagraph from '@/components/Atom/CoreParagraph/CoreParagraph';
 import CoreAuthor from '@/components/Atom/CoreAuthor/CoreAuthor';
 import CoreTags from '@/components/Atom/CoreTags/CoreTags';
 import CoreTitle from '@/components/Atom/CoreTitle/CoreTitle';
+import Head from 'next/head';
 
 interface Blog {
   _id: string;
@@ -29,8 +30,15 @@ interface Blog {
   createdAt: string;
 }
 
-export default function Page(promiseProps: { params: Promise<{  slug : string }> }) {
-  const {  slug } = use(promiseProps.params);
+function formatReadTime(minutes: number): string {
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  const hrText = hrs > 0 ? `${hrs} hr${hrs > 1 ? 's' : ''}` : '';
+  const minText = mins > 0 ? `${mins} min` : '';
+  return [hrText, minText].filter(Boolean).join(' ');
+}
+export default function Page(promiseProps: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(promiseProps.params);
 
   const [data, setData] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,7 +49,7 @@ export default function Page(promiseProps: { params: Promise<{  slug : string }>
         const res = await axios.get(`/api/blog-by-title?slug=${slug}`);
         setData(res.data.blog);
       } catch (err) {
-        console.error("Error fetching blog:", err);
+        setData(null);
       } finally {
         setLoading(false);
       }
@@ -50,46 +58,64 @@ export default function Page(promiseProps: { params: Promise<{  slug : string }>
     fetchPost();
   }, [slug]);
 
-  if (loading) return <p className="text-center py-10">Loading...</p>;
+  if (loading) return <p className="text-center py-10 text-gray-500">Loading...</p>;
   if (!data) return notFound();
 
   return (
-    <article className="max-w-4xl mx-auto p-6">
-      {/* Title & Meta */}
-      <header>
-        <CoreTitle data={data}></CoreTitle>
-        <p className="text-sm text-gray-600 mb-1">
-          Published on {new Date(data.createdAt).toDateString()} • {data.readTime} min read
-        </p>
-        <CoreAuthor data={data}/>
-      </header>
+    <>
+      <Head>
+        <title>{data.title} | Tech Coffee</title>
+        <meta name="description" content={data.metaDescription || data.title} />
+        <meta name="keywords" content={data.tags.join(', ')} />
+        <meta property="og:title" content={data.title} />
+        <meta property="og:description" content={data.metaDescription || data.title} />
+        <meta property="og:image" content={data.featuredImage} />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
 
-      {/* Featured Image */}
-      <div className="">
-        <Image
-          src={data.featuredImage}
-          alt={data.title}
-          width={600}
-          height={300}
-          className=''
-        />
-      </div>
+      <article className="max-w-4xl mx-5 p-6 bg-white shadow-md rounded-2xl mt-6">
+        {/* Title & Meta */}
+        <header className="mb-6">
+          <CoreTitle data={data} />
+          <p className="text-sm text-gray-600 mb-2">
+            Published on <time dateTime={data.createdAt}>{new Date(data.createdAt).toDateString()}</time> • {formatReadTime(data.readTime)} read
+          </p>
+          <CoreAuthor data={data} />
+        </header>
 
-      {/* Content */}
-      <section className="prose max-w-none prose-lg prose-slate">
-        {data.content.map((block) => {
-          if (block.type === "CoreParagraph") {
-            return <CoreParagraph block={block} key={block._id}/>
-          }
-          if (block.type === "CoreImage") {
-            return (
-              <CoreImage block={{ featuredImage: block.content, title: data.title }} key={block._id}/>
-            );
-          }
-          return null;
-        })}
-      </section>
-      <CoreTags block={data}></CoreTags>
-    </article>
+        {/* Featured Image */}
+        <div className="rounded-lg overflow-hidden shadow-sm mb-6">
+          <Image
+            src={data.featuredImage}
+            alt={data.title}
+            width={800}
+            height={400}
+            className="w-full h-auto object-cover"
+            priority
+          />
+        </div>
+
+        {/* Content */}
+        <section className="prose max-w-none prose-lg prose-slate dark:prose-invert mb-8">
+          {data.content.map((block) => {
+            if (block.type === "CoreParagraph") {
+              return <CoreParagraph block={block} key={block._id} />;
+            }
+            if (block.type === "CoreImage") {
+              return (
+                <CoreImage block={{ featuredImage: block.content, title: data.title }} key={block._id} />
+              );
+            }
+            return null;
+          })}
+        </section>
+
+        {/* Tags */}
+        <footer className="mt-4">
+          <CoreTags block={data} />
+        </footer>
+      </article>
+    </>
   );
 }
