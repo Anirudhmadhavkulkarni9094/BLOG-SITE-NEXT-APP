@@ -7,7 +7,7 @@ interface Post {
   _id: string;
   title: string;
   createdAt: string;
-  author?: string;
+  author?: {name?: string};
   category?: string;
   featuredImage?: string;
 }
@@ -66,7 +66,7 @@ export default async function BlogPage() {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
-                })} by {post.author || "Anirudh Kulkarni"}
+                })} by {post?.author?.name || "Anirudh Kulkarni"}
               </p>
               <p className="text-gray-700 mt-2">{post.category || "No summary available."}</p>
               <a
