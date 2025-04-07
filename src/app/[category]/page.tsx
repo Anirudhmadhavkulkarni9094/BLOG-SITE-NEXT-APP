@@ -22,7 +22,7 @@ function Page(promiseProps: { params: Promise<{ category: string }> }) {
           `/api/blog-by-category?category=${category}`
         );
         setPosts(
-          res.data.blogs.map((blog: any) => ({
+          res.data.blogs.map((blog: { title: string; createdAt: string; views: number; _id: string; slug: string; featuredImage: string }) => ({
             title: blog.title,
             createdAt: blog.createdAt,
             views: blog.views,
