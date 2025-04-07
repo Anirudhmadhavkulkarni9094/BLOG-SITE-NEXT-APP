@@ -49,6 +49,7 @@ export default function Page(promiseProps: { params: Promise<{ slug: string }> }
         const res = await axios.get(`/api/blog-by-title?slug=${slug}`);
         setData(res.data.blog);
       } catch (err) {
+        console.error(err);
         setData(null);
       } finally {
         setLoading(false);
