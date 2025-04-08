@@ -2,18 +2,25 @@ import CoreHeader from '@/components/Atom/CoreHeader/CoreHeader';
 import Image from 'next/image';
 import React from 'react';
 
-interface Article {
-  _id: string;
-  featuredImage?: string;
-  title: string;
-  metaDescription: string;
-  readTime: string;
-  author?: {
-    name: string;
-  };
+
+interface BlogPreview {
+    _id: string;
+    title: string;
+    slug: string;
+    category: string;
+    author : {
+        name: string;
+    }
+    featuredImage: string;
+    metaDescription: string;
+    createdAt: string;
+    readTime: number;
+  }
+interface TechnologyLayoutProps {
+  data: BlogPreview[];
 }
 
-function TechnologyLayout({ data }: { data: any[] }) {
+function TechnologyLayout({ data }: TechnologyLayoutProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
         <CoreHeader title='Technology Corner'/>
@@ -30,7 +37,7 @@ function TechnologyLayout({ data }: { data: any[] }) {
           </div>
 
           <div className="space-y-2">
-          {data.slice(1, 5).map((item: Article) => (
+          {data.slice(1, 5).map((item: BlogPreview) => (
             <div key={item._id} className="space-y-1">
             <p className="text-gray-700">{item?.metaDescription}</p>
             <div className="text-sm text-gray-500">

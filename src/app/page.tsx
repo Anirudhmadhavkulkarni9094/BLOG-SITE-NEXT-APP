@@ -12,32 +12,23 @@ interface BlogPreview {
   title: string;
   slug: string;
   category: string;
+  author:{
+    name: string;
+    profileLink: string;
+  }
   featuredImage: string;
   metaDescription: string;
   createdAt: string;
   readTime: number;
 }
 
-function formatReadTime(minutes: number): string {
-  const hrs = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  const hrText = hrs > 0 ? `${hrs} hr${hrs > 1 ? "s" : ""}` : "";
-  const minText = mins > 0 ? `${mins} min` : "";
-  return [hrText, minText].filter(Boolean).join(" ");
-}
 
 export default function Home() {
   const [blogs, setBlogs] = useState<BlogPreview[]>([]);
   const [loading, setLoading] = useState(true);
   const [techBlog, setTechBlog] = useState<BlogPreview[]>([]);
-  const [categories, setCategories] = useState<string[]>([
-    "Technology",
-    "AIML",
-    "Research",
-  ]);
-  const [categoryBlogs, setCategoryBlogs] = useState<{
-    [key: string]: BlogPreview[];
-  }>({});
+
+ 
 
   useEffect(() => {
     axios
@@ -51,25 +42,7 @@ export default function Home() {
       .then((res) => setTechBlog(res.data.blogs))
       .catch((err) => console.error("Error loading blogs", err))
       .finally(() => setLoading(false));
-
-    const fetchCategoryBlogs = async () => {
-      const categoryData: { [key: string]: BlogPreview[] } = {};
-      for (const category of categories) {
-        try {
-          const res = await axios.get(
-            `/api/blog-by-category?category=${category}`
-          );
-          categoryData[category] = res.data.blogs;
-          console.log(`Blogs for category ${category}:`, res.data.blogs);
-        } catch (err) {
-          console.error(`Error loading blogs for category ${category}`, err);
-        }
-      }
-      setCategoryBlogs(categoryData);
-    };
-
-    fetchCategoryBlogs();
-  }, [categories]);
+  }, []);
 
   return (
     <>
