@@ -86,16 +86,17 @@ export default function Page(promiseProps: { params: Promise<{ slug: string }> }
         </header>
 
         {/* Featured Image */}
-        <div className="rounded-lg overflow-hidden shadow-sm mb-6">
-          <Image
-            src={data.featuredImage}
-            alt={data.title}
-            width={800}
-            height={400}
-            className="w-full h-auto object-cover"
-            priority
-          />
-        </div>
+        <div className="relative  rounded-lg overflow-hidden shadow-sm mb-6">
+  <Image
+    src={data.featuredImage}
+    alt={data.title}
+    width={800}
+    height={400}
+    className="object-cover"
+    priority
+  />
+</div>
+
 
         {/* Content */}
         <section className="prose max-w-none prose-lg prose-slate dark:prose-invert mb-8">
