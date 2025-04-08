@@ -3,7 +3,7 @@ import BreadCrumbs from '../molecule/Breadcrumbs/BreadCrumbs'
 
 function Navbar() {
   return (
-    <div className='flex items-center justify-between p-4'>
+    <div className='flex items-center justify-between'>
         <BreadCrumbs/>
     </div>
   )

@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { use, useEffect, useState } from "react";
 import { Loader } from "lucide-react";
 import HorizontalTextCard from "@/components/HorizontalTextCard/HorizontalTextCard";
+import AdBlock from "@/components/molecule/AdBlock/AdBlock";
 
 function Page(promiseProps: { params: Promise<{ category: string }> }) {
   const { category } = use(promiseProps.params);
@@ -117,9 +118,11 @@ function Page(promiseProps: { params: Promise<{ category: string }> }) {
       {/* Main Content */}
       <div className="w-3/4">
         {renderPostList()}
+        <AdBlock type="horizontal"/>
       </div>
       {/* Right Sidebar (optional) */}
-      <div className="w-1/4 p-2 text-gray-500 italic">Ad space / Newsletter</div>
+      <div className="w-1/4 p-2 text-gray-500 italic">
+      <AdBlock type="vertical"/></div>
     </div>
   );
 }

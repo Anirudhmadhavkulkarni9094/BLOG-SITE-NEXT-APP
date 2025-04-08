@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import AdBlock from '../AdBlock/AdBlock'
 
 function ResearchLayout() {
    const data =  [
@@ -180,6 +181,7 @@ function ResearchLayout() {
                         </Link>
                     ))
                 }
+                <AdBlock type='square'/>
             </div>
         </div>
     </div>
