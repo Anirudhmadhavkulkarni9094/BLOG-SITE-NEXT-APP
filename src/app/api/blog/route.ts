@@ -13,19 +13,20 @@ export async function POST(req: Request) {
     console.log("Received data:", data);
 
     type Block =
-  | { type: 'CoreParagraph' | 'CoreTitle'; content: string }
-  | { type: 'CoreImage'; content: string }
-  | { type: string; content: string };
+      | { type: 'CoreParagraph' | 'CoreTitle'; content: string }
+      | { type: 'CoreImage'; content: string }
+      | { type: string; content: string };
 
-function calculateReadingTimeFromBlocks(blocks: Block[]): string {
-  const textContent = blocks
-    .filter(block => block.type === 'CoreParagraph' || block.type === 'CoreTitle')
-    .map(block => block.content)
-    .join(' ');
+    function calculateReadingTimeFromBlocks(blocks: Block[]): string {
+      const textContent = blocks
+        .filter(block => block.type === 'CoreParagraph' || block.type === 'CoreTitle')
+        .map(block => block.content)
+        .join(' ');
 
-  const stats = readingTime(textContent);
-  return stats.text; // e.g., "2 min read"
-}
+      const stats = readingTime(textContent);
+      return stats.text; // e.g., "2 min read"
+    }
+
     const {
       title,
       category,
@@ -36,7 +37,6 @@ function calculateReadingTimeFromBlocks(blocks: Block[]): string {
     } = data;
 
     const readTime = calculateReadingTimeFromBlocks(content);
-    // Validation
     if (!title || !category || !content) {
       return NextResponse.json(
         { success: false, error: "Missing required fields" },
@@ -45,14 +45,13 @@ function calculateReadingTimeFromBlocks(blocks: Block[]): string {
     }
 
     const author = {
-      name : "Anirudh Kulkarni",
-      avatar : null,
-      bio : "A passionate developer and tech enthusiast.",
-      profileLink : "https://anirudh-kulkarni.vercel.app/",
-    }
+      name: "Anirudh Kulkarni",
+      avatar: null,
+      bio: "A passionate developer and tech enthusiast.",
+      profileLink: "https://anirudh-kulkarni.vercel.app/",
+    };
 
     const metaDescription = title;
-
 
     if (!Array.isArray(content)) {
       return NextResponse.json(
@@ -61,10 +60,8 @@ function calculateReadingTimeFromBlocks(blocks: Block[]): string {
       );
     }
 
-    // Generate slug
     const slug = slugify(title, { lower: true, strict: true });
 
-    // Process content and upload images if needed
     const processedContent = await Promise.all(
       content.map(async (item: any) => {
         if (
@@ -75,22 +72,18 @@ function calculateReadingTimeFromBlocks(blocks: Block[]): string {
           try {
             const res = await fetch(item.content);
             const file = await res.blob();
-
             const fileName = `blog-images/${Date.now()}.jpg`;
             const uploaded = await put(fileName, file, { access: "public" });
-
             return { ...item, content: uploaded.url };
           } catch (err) {
             console.error("Image upload failed:", err);
             return { ...item, content: "IMAGE_UPLOAD_FAILED" };
           }
         }
-
         return item;
       })
     );
 
-    // Create and save blog
     const newBlog = new Blog({
       title,
       slug,
@@ -106,22 +99,35 @@ function calculateReadingTimeFromBlocks(blocks: Block[]): string {
 
     await newBlog.save();
 
+    // Add blog summary to search index
+    const fs = require("fs");
+    const searchIndexPath = "public/search-index.json";
+    let searchIndex = [];
+    try {
+      const existing = fs.readFileSync(searchIndexPath, "utf8");
+      searchIndex = JSON.parse(existing);
+    } catch (e) {
+      console.log("Search index not found, creating new one.");
+    }
+
+    const summary = {
+      title: newBlog.title,
+      slug: newBlog.slug,
+      metaDescription: newBlog.metaDescription,
+      category: newBlog.category,
+      tags: newBlog.tags,
+      readTime: newBlog.readTime,
+      featuredImage: newBlog.featuredImage,
+      author: newBlog.author,
+    };
+
+    searchIndex.push(summary);
+    fs.writeFileSync(searchIndexPath, JSON.stringify(searchIndex, null, 2));
+
     return NextResponse.json(
       {
         success: true,
-        data: {
-          title: newBlog.title,
-          slug: newBlog.slug,
-          metaDescription: newBlog.metaDescription,
-          status: newBlog.status,
-          tags: newBlog.tags,
-          readTime: newBlog.readTime,
-          category: newBlog.category,
-          featuredImage: newBlog.featuredImage,
-          content: newBlog.content,
-          author: newBlog.author,
-          relatedArticles: newBlog.relatedArticles,
-        },
+        data: summary,
       },
       { status: 201 }
     );
@@ -133,6 +139,7 @@ function calculateReadingTimeFromBlocks(blocks: Block[]): string {
     );
   }
 }
+
 
 export async function GET() {
   try {
