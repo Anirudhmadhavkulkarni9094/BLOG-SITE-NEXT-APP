@@ -33,13 +33,6 @@ interface Blog {
   relatedArticles: Blog[];
 }
 
-function formatReadTime(minutes: number): string {
-  const hrs = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  const hrText = hrs > 0 ? `${hrs} hr${hrs > 1 ? "s" : ""}` : "";
-  const minText = mins > 0 ? `${mins} min` : "";
-  return [hrText, minText].filter(Boolean).join(" ");
-}
 export default function Page(promiseProps: {
   params: Promise<{ slug: string }>;
 }) {
