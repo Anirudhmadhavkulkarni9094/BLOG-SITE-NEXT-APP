@@ -9,6 +9,7 @@ interface Article {
   title: string;
   createdAt: string;
   metaDescription: string;
+  category: string;
   slug: string;
   author?: {
     name: string;

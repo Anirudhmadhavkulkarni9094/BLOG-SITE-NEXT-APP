@@ -7,6 +7,7 @@ function VerticleTextCard({
   item: {
     title: string;
     createdAt: string;
+    category: string;
     _id: string;
     slug: string;
     featuredImage: string;
@@ -15,7 +16,7 @@ function VerticleTextCard({
 }) {
   return (
     <Link
-      href={`/Research/${item.slug}` || "/"}
+      href={`/${item.category}/${item.slug}` || "/"}
       key={item._id}
       className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300"
     >
