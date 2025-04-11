@@ -3,46 +3,54 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import axios from "axios";
+
 import FeaturedArticleLayout from "@/components/molecule/FeaturedArticleLayout/FeaturedArticleLayout";
 import TechnologyLayout from "@/components/molecule/TechnologyLayout/TechnologyLayout";
 import ResearchLayout from "@/components/molecule/ResearchLayout/ResearchLayout";
+// import AILayout from "@/components/molecule/AILayout/AILayout"; // example
 
 interface BlogPreview {
   _id: string;
   title: string;
   slug: string;
   category: string;
-  author:{
+  author: {
     name: string;
     profileLink: string;
-  }
+  };
   featuredImage: string;
   metaDescription: string;
   createdAt: string;
   readTime: number;
 }
 
-
 export default function Home() {
   const [blogs, setBlogs] = useState<BlogPreview[]>([]);
+  const [groupedBlogs, setGroupedBlogs] = useState<Record<string, BlogPreview[]>>({});
   const [loading, setLoading] = useState(true);
-  const [techBlog, setTechBlog] = useState<BlogPreview[]>([]);
-
- 
 
   useEffect(() => {
     axios
       .get("/api/blog")
-      .then((res) => setBlogs(res.data.blogs.slice(0, 3)))
-      .catch((err) => console.error("Error loading blogs", err))
-      .finally(() => setLoading(false));
-
-    axios
-      .get("/api/blog-by-category?category=Technology")
-      .then((res) => setTechBlog(res.data.blogs))
+      .then((res) => {
+        const allBlogs: BlogPreview[] = res.data.blogs;
+        setBlogs(allBlogs.slice(0, 3)); // Featured blogs
+        setGroupedBlogs(groupByCategory(allBlogs));
+        console.log(groupedBlogs)
+      })
       .catch((err) => console.error("Error loading blogs", err))
       .finally(() => setLoading(false));
   }, []);
+
+  const groupByCategory = (blogs: BlogPreview[]) => {
+    return blogs.reduce((acc: Record<string, BlogPreview[]>, blog) => {
+      if (!acc[blog.category]) {
+        acc[blog.category] = [];
+      }
+      acc[blog.category].push(blog);
+      return acc;
+    }, {});
+  };
 
   return (
     <>
@@ -72,7 +80,7 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 py-12">
         <section className="text-center mb-16">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Welcome to <span className="text-indigo-600">Tech Coffee ☕</span>
+            Welcome to <span className="text-amber-800">Tech Espresso ☕</span>
           </h1>
           <p className="text-lg text-gray-600 max-w-xl mx-auto">
             Curated reads across development, AI, research, and everything tech.
@@ -83,22 +91,24 @@ export default function Home() {
         {loading ? (
           <p className="text-center text-gray-500">Loading articles...</p>
         ) : (
-          <section className="flex items-center justify-center">
-            <div className="w-3/4">
-            <FeaturedArticleLayout data={blogs} />
+          <section className="flex items-center justify-center mb-12">
+            <div className="w-4/5">
+              <FeaturedArticleLayout data={blogs} />
             </div>
-            <div className="w-1/4 hidden lg:block">
-            <ResearchLayout></ResearchLayout>
+            <div className="w-1/5 hidden lg:block">
+              <ResearchLayout />
             </div>
           </section>
         )}
-        {loading ? (
-          <p className="text-center text-gray-500">Loading articles...</p>
-        ) : (
-          <section>
-            <TechnologyLayout data={techBlog} />
-          </section>
-        )}
+
+        {!loading &&
+          Object.entries(groupedBlogs).map(([category, data]) => {
+            
+            return <section key={category} className="mb-12">
+                <TechnologyLayout data={data} />
+              </section>
+
+          })}
       </main>
     </>
   );

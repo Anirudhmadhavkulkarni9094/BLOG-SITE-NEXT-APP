@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { use, useEffect, useState } from "react";
 import { Loader } from "lucide-react";
-import HorizontalTextCard from "@/components/HorizontalTextCard/HorizontalTextCard";
+import HorizontalTextCard from "@/components/molecule/HorizontalTextCard/HorizontalTextCard";
 import AdBlock from "@/components/molecule/AdBlock/AdBlock";
 
 function Page(promiseProps: { params: Promise<{ category: string }> }) {
@@ -81,7 +81,7 @@ function Page(promiseProps: { params: Promise<{ category: string }> }) {
 
   const renderFilter = () => {
     return (
-      <>
+      <div className="">
         <h2 className="text-xl font-semibold mb-4">Filters</h2>
 
         {/* Search */}
@@ -105,7 +105,7 @@ function Page(promiseProps: { params: Promise<{ category: string }> }) {
             <option value="views">Most Viewed</option>
           </select>
         </div>
-      </>
+      </div>
     );
   };
 

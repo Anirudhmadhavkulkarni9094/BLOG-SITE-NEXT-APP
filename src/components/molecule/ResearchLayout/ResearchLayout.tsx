@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import AdBlock from '../AdBlock/AdBlock'
+import VerticleTextCard from '../VerticleTextCard/VerticleTextCard'
 
 function ResearchLayout() {
    const data =  [
@@ -89,71 +90,6 @@ function ResearchLayout() {
             "createdAt": "2025-04-07T18:13:54.806Z",
             "updatedAt": "2025-04-07T18:13:54.806Z",
             "__v": 0
-        },
-        {
-            "author": {
-                "name": "Anirudh Kulkarni",
-                "avatar": null,
-                "bio": "A passionate developer and tech enthusiast.",
-                "profileLink": "https://anirudh-kulkarni.vercel.app/"
-            },
-            "_id": "67f415daadde9a4b7917316f",
-            "title": "Building a Scalable CMS with Next.js and MongoDB Atlas",
-            "slug": "building-a-scalable-cms-with-nextjs-and-mongodb-atlas",
-            "metaDescription": "Building a Scalable CMS with Next.js and MongoDB Atlas",
-            "category": "Technology",
-            "tags": [
-                "Next.js",
-                "MongoDB",
-                "CMS",
-                "Serverless"
-            ],
-            "content": [
-                {
-                    "type": "CoreParagraph",
-                    "content": "Scaling a CMS comes with challenges, but combining MongoDB Atlas and Vercel can make it effortless.",
-                    "_id": "67f415daadde9a4b79173170"
-                },
-                {
-                    "type": "CoreImage",
-                    "content": "https://cdn.example.com/images/architecture-diagram.png",
-                    "_id": "67f415daadde9a4b79173171"
-                },
-                {
-                    "type": "CoreParagraph",
-                    "content": "Let’s dive into setting up a scalable CMS backend with API routes and auto-scaling.",
-                    "_id": "67f415daadde9a4b79173172"
-                }
-            ],
-            "featuredImage": "https://cdn.example.com/images/scalable-cms.png",
-            "readTime": "1 min read",
-            "status": "draft",
-            "relatedArticles": [],
-            "createdAt": "2025-04-07T18:13:46.468Z",
-            "updatedAt": "2025-04-07T18:13:46.468Z",
-            "__v": 0
-        },
-        {
-            "tags": [],
-            "status": "draft",
-            "_id": "67f414cc470ee4d482bd6f2c",
-            "title": "Technology - technology",
-            "category": "Technology",
-            "content": [
-                {
-                    "type": "CoreParagraph",
-                    "content": "Technology - technology",
-                    "_id": "67f414cc470ee4d482bd6f2d"
-                },
-                {
-                    "type": "CoreImage",
-                    "_id": "67f414cc470ee4d482bd6f2e"
-                }
-            ],
-            "relatedArticles": [],
-            "createdAt": "2025-04-07T18:09:16.947Z",
-            "updatedAt": "2025-04-07T18:09:16.947Z",
-            "__v": 0
         }
     ]
   return (
@@ -163,25 +99,9 @@ function ResearchLayout() {
             <div className='flex flex-col  gap-8'>
                 {
                     data.slice(0,3).map((item) => (
-                        <Link href={`/Research/${item.slug}` || "/"} key={item._id} className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300">
-                            {item.featuredImage && (
-                                <div className="relative aspect-[16/9]">
-                                    <img src={item.featuredImage} alt={item.title} className="object-cover w-full h-full" />
-                                </div>
-                            )}
-                            <div className="p-3 space-y-1">
-                                <h3 className="text-xl font-semibold">{item.title}</h3>
-                                <div className="text-sm text-gray-500">
-                                    Published on {new Date(item.createdAt).toDateString()} by{' '}
-                                    <p className="text-blue-600 hover:underline">
-                                        {item.author?.name}
-                                    </p>
-                                </div>
-                            </div>
-                        </Link>
+                        <VerticleTextCard item={item} key={item._id}/>
                     ))
                 }
-                <AdBlock type='square'/>
             </div>
         </div>
     </div>
