@@ -1,6 +1,4 @@
-import Link from 'next/link'
 import React from 'react'
-import AdBlock from '../AdBlock/AdBlock'
 import VerticleTextCard from '../VerticleTextCard/VerticleTextCard'
 
 function ResearchLayout() {

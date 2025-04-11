@@ -1,6 +1,5 @@
 import CoreHeader from '@/components/Atom/CoreHeader/CoreHeader';
 import Image from 'next/image'
-import Link from 'next/link';
 import React from 'react'
 import VerticleTextCard from '../VerticleTextCard/VerticleTextCard';
 
