@@ -1,82 +1,80 @@
 import CoreHeader from '@/components/Atom/CoreHeader/CoreHeader';
 import Image from 'next/image';
 import React from 'react';
-
+import VerticleTextCard from '../VerticleTextCard/VerticleTextCard';
 
 interface BlogPreview {
-    _id: string;
-    title: string;
-    slug: string;
-    category: string;
-    author : {
-        name: string;
-    }
-    featuredImage: string;
-    metaDescription: string;
-    createdAt: string;
-    readTime: number;
-  }
+  _id: string;
+  title: string;
+  slug: string;
+  category: string;
+  author: {
+    name: string;
+  };
+  featuredImage: string;
+  metaDescription: string;
+  createdAt: string;
+  readTime: number;
+}
+
 interface TechnologyLayoutProps {
   data: BlogPreview[];
 }
 
 function TechnologyLayout({ data }: TechnologyLayoutProps) {
+  if (!data || data.length === 0) return null;
+
+  const articleCount = data.length;
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-        <CoreHeader title='Technology Corner'/>
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left - Featured Article */}
-        <div className="lg:w-2/3 space-y-4 border-1 p-4 rounded-lg">
+    <div className="max-w-7xl mx-auto px-4 py-10 space-y-8">
+      <CoreHeader title={data[0].category} />
+
+      {articleCount === 1 && (
+        <div className="w-full space-y-4 border p-4 rounded-lg">
           <div className="relative aspect-[16/9] overflow-hidden rounded-xl shadow-md">
             <Image
-              src={data[0]?.featuredImage || "/fallback-image.png"}
-              alt={data[0]?.title || "Article image"}
+              src={data[0].featuredImage || "/fallback-image.png"}
+              alt={data[0].title || "Article image"}
               fill
               className="object-cover"
             />
           </div>
-
           <div className="space-y-2">
-          {data.slice(1, 5).map((item: BlogPreview) => (
-            <div key={item._id} className="space-y-1">
-            <p className="text-gray-700">{item?.metaDescription}</p>
+            <p className="text-xl font-semibold">{data[0].title}</p>
+            <p className="text-gray-700">{data[0].metaDescription}</p>
             <div className="text-sm text-gray-500">
-              <span>{item?.readTime} </span>
-              <span>• by {item?.author?.name}</span>
+              <span>{data[0].readTime} min read</span>
+              <span> • by {data[0].author?.name}</span>
             </div>
-            </div>
-            ))}
-            </div>
+          </div>
         </div>
+      )}
 
-        {/* Right - Grid of 4 Articles */}
-        <div className="lg:w-1/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-          {data.slice(1, 5).map((item) => (
-            <div
-              key={item._id}
-              className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300"
-            >
-              {item.featuredImage && (
-                <div className="relative aspect-[16/9]">
-                  <Image
-                    src={item.featuredImage}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              )}
-              <div className="p-3 space-y-1">
-                <h3 className="text-md font-semibold text-gray-800">{item.title}</h3>
-                <p className="text-sm text-gray-600 line-clamp-2">{item.metaDescription}</p>
-                <div className="text-xs text-gray-500">
-                  {item.readTime} • {item.author?.name}
-                </div>
-              </div>
-            </div>
+      {articleCount === 2 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {data.map((item) => (
+              <VerticleTextCard key={item._id} item={item} />
           ))}
         </div>
-      </div>
+      )}
+
+      {articleCount > 2 && (
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Featured Article */}
+          <div className="lg:w-2/3 space-y-4 border p-4 rounded-lg">
+          <VerticleTextCard key={data[0]._id} item={data[0]} />
+
+          </div>
+
+          {/* Side Cards */}
+          <div className="lg:w-1/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+            {data.slice(1, 5).map((item) => (
+              <VerticleTextCard key={item._id} item={item} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
