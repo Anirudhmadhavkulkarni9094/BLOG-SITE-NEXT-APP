@@ -80,12 +80,12 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 py-12">
         <section className="text-center mb-16">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Welcome to <span className="text-amber-800">Tech Espresso ☕</span>
+            Welcome to <span className="text-amber-800">Tech-Espresso ☕</span>
           </h1>
-          <p className="text-lg text-gray-600 max-w-xl mx-auto">
+          <h2 className="text-lg text-gray-600 max-w-xl mx-auto">
             Curated reads across development, AI, research, and everything tech.
             Get your daily dose of tech inspiration.
-          </p>
+          </h2>
         </section>
 
         {loading ? (

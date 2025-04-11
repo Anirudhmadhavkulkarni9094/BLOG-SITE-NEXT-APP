@@ -1,5 +1,6 @@
 import React from 'react'
 import VerticleTextCard from '../VerticleTextCard/VerticleTextCard'
+import AdBlock from '../AdBlock/AdBlock'
 
 function ResearchLayout() {
    const data =  [
@@ -88,19 +89,63 @@ function ResearchLayout() {
             "createdAt": "2025-04-07T18:13:54.806Z",
             "updatedAt": "2025-04-07T18:13:54.806Z",
             "__v": 0
+        },
+        {
+            "author": {
+                "name": "Anirudh Kulkarni",
+                "avatar": null,
+                "bio": "A passionate developer and tech enthusiast.",
+                "profileLink": "https://anirudh-kulkarni.vercel.app/"
+            },
+            "_id": "67f415e2adde9a4b791731744",
+            "title": "Optimizing Image Delivery with Vercel & Next.js Image Component",
+            "slug": "optimizing-image-delivery-with-vercel-and-nextjs-image-component",
+            "metaDescription": "Optimizing Image Delivery with Vercel & Next.js Image Component",
+            "category": "Technology",
+            "tags": [
+                "Next.js",
+                "Vercel",
+                "Performance",
+                "Image Optimization"
+            ],
+            "content": [
+                {
+                    "type": "CoreParagraph",
+                    "content": "Poorly optimized images can slow down your site drastically. Here’s how Next.js fixes that.",
+                    "_id": "67f415e2adde9a4b79173175"
+                },
+                {
+                    "type": "CoreImage",
+                    "content": "https://cdn.example.com/images/lighthouse-score.png",
+                    "_id": "67f415e2adde9a4b79173176"
+                },
+                {
+                    "type": "CoreParagraph",
+                    "content": "Learn how to use the Next.js `<Image />` component effectively with remote sources.",
+                    "_id": "67f415e2adde9a4b79173177"
+                }
+            ],
+            "featuredImage": "https://cdn.example.com/images/image-opt-cover.png",
+            "readTime": "1 min read",
+            "status": "draft",
+            "relatedArticles": [],
+            "createdAt": "2025-04-07T18:13:54.806Z",
+            "updatedAt": "2025-04-07T18:13:54.806Z",
+            "__v": 0
         }
     ]
   return (
     <div>
         <div>
             <h1 className="text-3xl font-bold mb-8">Research Corner</h1>
-            <div className='flex flex-col  gap-8'>
+            <div className='flex flex-col my-4  gap-8'>
                 {
                     data.slice(0,3).map((item) => (
                         <VerticleTextCard item={item} key={item._id}/>
                     ))
                 }
             </div>
+            <AdBlock type='vertical'/>
         </div>
     </div>
   )
