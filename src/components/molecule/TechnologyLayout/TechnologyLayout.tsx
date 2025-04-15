@@ -31,14 +31,16 @@ function TechnologyLayout({ data }: TechnologyLayoutProps) {
       <CoreHeader title={data[0].category} />
 
       {articleCount === 1 && (
-        <div className="w-full space-y-4 border p-4 rounded-lg">
+        <div className='flex justify-center'>
+
+        <div className="w-2/3  space-y-4 border p-4 rounded-lg">
           <div className="relative aspect-[16/9] overflow-hidden rounded-xl shadow-md">
             <Image
               src={data[0].featuredImage || "/fallback-image.png"}
               alt={data[0].title || "Article image"}
               fill
               className="object-cover"
-            />
+              />
           </div>
           <div className="space-y-2">
             <p className="text-xl font-semibold">{data[0].title}</p>
@@ -49,6 +51,7 @@ function TechnologyLayout({ data }: TechnologyLayoutProps) {
             </div>
           </div>
         </div>
+              </div>
       )}
 
       {articleCount === 2 && (

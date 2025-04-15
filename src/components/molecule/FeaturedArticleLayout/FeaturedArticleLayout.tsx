@@ -1,7 +1,6 @@
 import CoreHeader from '@/components/Atom/CoreHeader/CoreHeader';
 import Image from 'next/image'
 import React from 'react'
-import VerticleTextCard from '../VerticleTextCard/VerticleTextCard';
 import Link from 'next/link';
 
 interface Article {
@@ -57,11 +56,11 @@ function FeaturedArticleLayout({ data }: FeaturedArticleLayoutProps) {
           {/* Secondary Articles */}
           <div>
           <CoreHeader title='More Article'/>
-          <div className="grid gap-8 md:grid-cols-2">
+          {/* <div className="grid gap-8 md:grid-cols-2">
               {data.slice(1, 3).map((item) => (
                 <VerticleTextCard item={item} key={item._id}/>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       )
