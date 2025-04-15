@@ -7,7 +7,14 @@ interface Article {
 }
 
 interface SidebarProps {
-  setData: (data: any) => void;
+  setData: (data: {
+    title: string;
+    excerpt: string;
+    category: string;
+    tags: string[];
+    relatedArticles: { title: string; link: string }[];
+    featuredImage?: { url: string } | null;
+  }) => void;
   data: {
     title: string;
     excerpt: string;

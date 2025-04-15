@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useEditor, EditorContent, Editor } from "@tiptap/react";
+import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import styled from 'styled-components';
 import { generateHTML } from '@tiptap/html'
 
 // Lowlight Setup
@@ -61,7 +60,6 @@ lowlight.register("javascript", javascript);
 const Tiptap = () => {
   const [activeHeading, setActiveHeading] = useState<number | null>(null);
   const [linkURL, setLinkURL] = useState<string>("");
-  const [imageURL, setImageURL] = useState<string>("");
 
   const extensions = [
     StarterKit.configure({
@@ -149,13 +147,7 @@ const Tiptap = () => {
     setLinkURL("");
   };
 
-  // Function to insert an image via URL into the editor
-  const insertImageByURL = () => {
-    if (imageURL) {
-      editor?.chain().focus().setImage({ src: imageURL }).run();
-      setImageURL("");
-    }
-  };
+
 
   // Function to handle local file upload and convert to Base64 for immediate insertion
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

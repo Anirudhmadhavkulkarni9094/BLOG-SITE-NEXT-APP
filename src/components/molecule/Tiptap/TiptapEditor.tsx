@@ -35,12 +35,20 @@ const TiptapEditor = () => {
     `,
   });
 
-  const [data, setData ] = useState({
+  const [data, setData ] = useState<{
+    title: string;
+    excerpt: string;
+    category: string;
+    tags: string[];
+    relatedArticles: { title: string; link: string }[];
+    featuredImage?: { url: string } | null;
+  }>({
     title: "",
     excerpt: "",
     category: "",
     tags: [],
     relatedArticles: [],
+    featuredImage: null,
   });
 
   const handleSave = async () => {
@@ -100,7 +108,7 @@ const TiptapEditor = () => {
 
       {/* Sidebar Section */}
       <div className="w-1/3 flex flex-col space-y-4 gap-5">
-        <Toolbar editor={editor} activeHeading={activeHeading} setActiveHeading={setActiveHeading} />
+        {editor && <Toolbar editor={editor} activeHeading={activeHeading} setActiveHeading={setActiveHeading} />}
         {editor && <LinkToolbar linkURL={linkURL} setLinkURL={setLinkURL} editor={editor} />}
         <ImageUpload imageURL={imageURL} setImageURL={setImageURL} editor={editor} />
         <Sidebar setData= {setData} data={data} />
