@@ -6,12 +6,24 @@ interface Article {
   title: string;
 }
 
-function Sidebar({ setData, data }: any) {
+interface SidebarProps {
+  setData: (data: any) => void;
+  data: {
+    title: string;
+    excerpt: string;
+    category: string;
+    tags: string[];
+    relatedArticles: { title: string; link: string }[];
+    featuredImage?: { url: string } | null;
+  };
+}
+
+function Sidebar({ setData, data }: SidebarProps) {
   const [title, setTitle] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [category, setCategory] = useState('tech');
   const [tags, setTags] = useState<string[]>([]);
-  const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
+  const [relatedArticles, setRelatedArticles] = useState<{ title: string; link: string }[]>([]);
   const [featuredImage, setFeaturedImage] = useState<string>('');
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [allArticles, setAllArticles] = useState<Article[]>([]);

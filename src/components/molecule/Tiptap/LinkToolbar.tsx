@@ -1,9 +1,10 @@
 import React from "react";
+import { Editor } from "@tiptap/core"; // Import the Editor type
 
 interface LinkToolbarProps {
   linkURL: string;
-  setLinkURL: React.Dispatch<React.SetStateAction<string>>;
-  editor: any;
+  setLinkURL: (url: string) => void;
+  editor: Editor; // Ensure you import the correct Editor type from the library
 }
 
 export const LinkToolbar = ({ linkURL, setLinkURL, editor }: LinkToolbarProps) => {

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import styled from 'styled-components';
 import { generateHTML } from '@tiptap/html'
@@ -16,7 +16,6 @@ import Details from "@tiptap-pro/extension-details";
 import DetailsContent from "@tiptap-pro/extension-details-content";
 import DetailsSummary from "@tiptap-pro/extension-details-summary";
 import DragHandle from "@tiptap-pro/extension-drag-handle";
-import DragHandleReact from "@tiptap-pro/extension-drag-handle-react";
 import Emoji from "@tiptap-pro/extension-emoji";
 import FileHandler from "@tiptap-pro/extension-file-handler";
 import Mathematics from "@tiptap-pro/extension-mathematics";
@@ -203,8 +202,8 @@ const Tiptap = () => {
   
     const json = editor.getJSON();
   
-    const blocks = json?.content?.map((node: any) => {
-      const blockContent = node.content?.map((c: any) => c.text || "").join("") || "";
+    const blocks = json?.content?.map((node) => {
+      const blockContent = node.content?.map((c) => c.text || "").join("") || "";
   
       return {
         type: node.type,

@@ -86,7 +86,7 @@ export async function POST(req: Request) {
       const existing = await fs.readFile(searchIndexPath, "utf8");
       searchIndex = JSON.parse(existing);
     } catch (e) {
-      console.log("Search index not found, creating new one.");
+      console.log("Search index not found, creating new one.", e);
     }
 
     const summary = {

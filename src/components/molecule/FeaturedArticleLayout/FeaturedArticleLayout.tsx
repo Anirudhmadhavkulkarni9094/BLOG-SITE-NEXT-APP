@@ -1,7 +1,6 @@
 import CoreHeader from '@/components/Atom/CoreHeader/CoreHeader';
 import Image from 'next/image'
 import React from 'react'
-import VerticleTextCard from '../VerticleTextCard/VerticleTextCard';
 import Link from 'next/link';
 
 interface Article {

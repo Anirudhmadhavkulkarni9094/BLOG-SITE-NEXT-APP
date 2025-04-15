@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { useEditor, EditorContent, JSONContent } from "@tiptap/react";
 import { useRouter } from "next/navigation";
 import { generateHTML } from "@tiptap/html";
 import { createLowlight } from "lowlight";
@@ -14,7 +13,6 @@ import { ImageUpload } from "./ImageUpload";
 import Sidebar from "./Sidebar"; // ⬅️ import Sidebar
 import "./style.css";
 import axios from "axios";
-import { Router } from "next/router";
 
 const lowlight = createLowlight();
 lowlight.register("html", html);
@@ -50,10 +48,10 @@ const TiptapEditor = () => {
 
     const json = editor.getJSON();
     const blocks = json?.content
-      ?.map((node: any) => {
-        const blockContent = node.content?.map((c: any) => c.text || "").join("") || "";
+      ?.map((node: JSONContent) => {
+        const blockContent = node.content?.map((c: JSONContent) => c.text || "").join("") || "";
         return {
-          type: node.type,
+          type: node.type || "unknown",
           content: blockContent,
           renderedContent: generateHTML({ type: "doc", content: [node] }, Extensions(lowlight)),
         };
@@ -62,7 +60,7 @@ const TiptapEditor = () => {
         const alwaysIncludeTypes = ["image", "horizontalRule", "math", "codeBlock"];
         const shouldFilterText = ["paragraph", "heading"];
         return (
-          
+
           block.content.trim() !== "" ||
           alwaysIncludeTypes.includes(block.type) ||
           !shouldFilterText.includes(block.type)
@@ -103,7 +101,7 @@ const TiptapEditor = () => {
       {/* Sidebar Section */}
       <div className="w-1/3 flex flex-col space-y-4 gap-5">
         <Toolbar editor={editor} activeHeading={activeHeading} setActiveHeading={setActiveHeading} />
-        <LinkToolbar linkURL={linkURL} setLinkURL={setLinkURL} editor={editor} />
+        {editor && <LinkToolbar linkURL={linkURL} setLinkURL={setLinkURL} editor={editor} />}
         <ImageUpload imageURL={imageURL} setImageURL={setImageURL} editor={editor} />
         <Sidebar setData= {setData} data={data} />
       </div>

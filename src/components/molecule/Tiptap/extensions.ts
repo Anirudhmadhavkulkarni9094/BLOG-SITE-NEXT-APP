@@ -36,8 +36,11 @@ import Mathematics from "@tiptap-pro/extension-mathematics";
 import NodeRange from "@tiptap-pro/extension-node-range";
 import TableOfContents from "@tiptap-pro/extension-table-of-contents";
 import UniqueId from "@tiptap-pro/extension-unique-id";
+import { Root } from "hast";
+import { LanguageFn } from "highlight.js";
+import { Options, AutoOptions } from "lowlight";
 
-export const Extensions = (lowlight: any) => [
+export const Extensions = (lowlight: { highlight: (language: string, value: string, options?: Readonly<Options> | null | undefined) => Root; highlightAuto: (value: string, options?: Readonly<AutoOptions> | null | undefined) => Root; listLanguages: () => Array<string>; register: { (grammars: Readonly<Record<string, LanguageFn>>): undefined; (name: string, grammar: LanguageFn): undefined; }; registerAlias: { (aliases: Readonly<Record<string, ReadonlyArray<string> | string>>): undefined; (language: string, alias: ReadonlyArray<string> | string): undefined; }; registered: (aliasOrName: string) => boolean; }) => [
   StarterKit.configure({
     bulletList: false,
     orderedList: false,

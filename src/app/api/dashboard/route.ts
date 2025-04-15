@@ -1,7 +1,16 @@
 import { NextResponse } from "next/server";
 import BlogCollection from "../../../models/Blog";
 import { connectDB } from "@/lib/db";
-import Blog from "../../../models/Blog";
+
+interface BlogSummary {
+  title: string;
+  slug: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+  featuredImage: { url: string };
+}
+
 
 export async function GET() {
   await connectDB();
@@ -27,10 +36,10 @@ export async function GET() {
       )
     );
 
-    const results = await Promise.all(blogFetchPromises);
+    const results: BlogSummary[][] = await Promise.all(blogFetchPromises);
 
-    const categorizedBlogs: Record<string, any[]> = {};
-    categories.forEach((cat, index) => {
+    const categorizedBlogs: Record<string, BlogSummary[]> = {};
+    categories.forEach((cat:string, index:number) => {
       categorizedBlogs[cat] = results[index];
     });
 
