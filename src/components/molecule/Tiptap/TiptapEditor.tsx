@@ -110,7 +110,7 @@ const TiptapEditor = () => {
       <div className="w-1/3 flex flex-col space-y-4 gap-5">
         {editor && <Toolbar editor={editor} activeHeading={activeHeading} setActiveHeading={setActiveHeading} />}
         {editor && <LinkToolbar linkURL={linkURL} setLinkURL={setLinkURL} editor={editor} />}
-        <ImageUpload imageURL={imageURL} setImageURL={setImageURL} editor={editor} />
+        {editor && <ImageUpload imageURL={imageURL} setImageURL={setImageURL} editor={editor} />}
         <Sidebar setData= {setData} data={data} />
       </div>
     </div>

@@ -1,9 +1,10 @@
 import React from "react";
+import { Editor } from "@tiptap/core"; // Import the Editor type
 
 interface ImageUploadProps {
   imageURL: string;
   setImageURL: (url: string) => void;
-  editor: any; // Replace 'any' with the specific type of your editor if available
+  editor: Editor; // Replace 'any' with the specific type of your editor if available
 }
 
 export const ImageUpload: React.FC<ImageUploadProps> = ({ imageURL, setImageURL, editor }) => {
