@@ -25,7 +25,6 @@ function Sidebar({ setData, data }: SidebarProps) {
   const [tags, setTags] = useState<string[]>([]);
   const [relatedArticles, setRelatedArticles] = useState<{ title: string; link: string }[]>([]);
   const [featuredImage, setFeaturedImage] = useState<string>('');
-  const [imageFile, setImageFile] = useState<File | null>(null);
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [selectedArticles, setSelectedArticles] = useState<Article[]>([]);
 
@@ -103,7 +102,6 @@ const handleRemoveArticle = (article: Article) => {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setImageFile(file);
 
       const formData = new FormData();
       formData.append('file', file);

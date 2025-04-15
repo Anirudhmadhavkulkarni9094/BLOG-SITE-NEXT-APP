@@ -1,8 +1,9 @@
 import React from "react";
 import { Level } from "@tiptap/extension-heading";
+import { Editor } from "@tiptap/core"; // Import the Editor type
 
 interface ToolbarProps {
-  editor: any;
+  editor: Editor; // Replace 'any' with the specific type of the editor if known
   activeHeading: number | null;
   setActiveHeading: (level: number) => void;
 }
