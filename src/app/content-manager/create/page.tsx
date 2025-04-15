@@ -87,8 +87,8 @@ function Page() {
       });
 
       toast.success("Post saved successfully!");
-      router.push("/content-manager/posts");
-      console.log("Post saved successfully:", data);
+      // router.push("/content-manager/posts");
+      console.log("Post saved successfully:", post);
     } catch (error: any) {
       console.error("Error saving post:", error.response?.data || error.message);
       toast.error("Failed to save post!");

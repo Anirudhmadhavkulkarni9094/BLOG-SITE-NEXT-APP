@@ -1,0 +1,256 @@
+[
+  {
+    "title": "Understanding Async/Await in JavaScript",
+    "slug": "understanding-asyncawait-in-javascript",
+    "metaDescription": "Understanding Async/Await in JavaScript",
+    "category": "JavaScript",
+    "tags": [
+      "javascript",
+      "async",
+      "await",
+      "promises"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": {
+      "imageLink": "UPLOAD_FAILED",
+      "caption": "JavaScript Async/Await",
+      "altText": "JS Async",
+      "credit": "JS Weekly",
+      "refLink": "https://jsweekly.com"
+    },
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "Understanding Async/Await in JavaScript",
+    "slug": "understanding-asyncawait-in-javascript",
+    "metaDescription": "A beginner-friendly guide to async/await with examples.",
+    "category": "JavaScript",
+    "tags": [
+      "javascript",
+      "async",
+      "await",
+      "promises"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": {
+      "imageLink": "UPLOAD_FAILED",
+      "caption": "JavaScript Async/Await",
+      "altText": "JS Async",
+      "credit": "JS Weekly",
+      "refLink": "https://jsweekly.com"
+    },
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "Hello",
+    "slug": "hello",
+    "metaDescription": "Hello",
+    "category": "Technology test",
+    "tags": [],
+    "readTime": "0 min read",
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "TWST",
+    "slug": "twst",
+    "metaDescription": "TWST",
+    "category": "test",
+    "tags": [],
+    "readTime": "0 min read",
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "TITLE TEST",
+    "slug": "title-test",
+    "metaDescription": "TITLE TEST",
+    "category": "tech",
+    "tags": [
+      "TITLE TEST",
+      "TITLE TEST"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": {},
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "Data ",
+    "slug": "data",
+    "metaDescription": "Data ",
+    "category": "tech",
+    "tags": [
+      "Data",
+      "Data"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": null,
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "tutle",
+    "slug": "tutle",
+    "metaDescription": "title",
+    "category": "tech",
+    "tags": [
+      "tech",
+      "blog"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": {},
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "🚀 How Generative AI is Transforming Web Development in 2025",
+    "slug": "how-generative-ai-is-transforming-web-development-in-2025",
+    "metaDescription": "Generative AI is rapidly reshaping the web development landscape — from writing code and designing interfaces to automating tests and content creation. In this blog, we explore how developers in 2025 are using GenAI tools to work faster, build smarter, and push the boundaries of what's possible on the web.",
+    "category": "tech",
+    "tags": [
+      "AIML",
+      "GenAI",
+      "Technology"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": {},
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "🌍 The Global Race for AI Supremacy: Who’s Winning the AI Model War?",
+    "slug": "the-global-race-for-ai-supremacy-whos-winning-the-ai-model-war",
+    "metaDescription": "As countries and companies battle for dominance in artificial intelligence, the real war is being fought over large language models. From OpenAI's GPT to China's Ernie and Europe's Mistral, this global race isn't just about technology — it's about power, policy, and the future of human progress.",
+    "category": "tech",
+    "tags": [
+      "Global-Politics",
+      "Technology",
+      "AI-Model"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": {},
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "✍️ The World of Blogging: A Digital Career That Still Thrives in 2025",
+    "slug": "the-world-of-blogging-a-digital-career-that-still-thrives-in-2025",
+    "metaDescription": "Blogging in 2025 is more than just a hobby — it’s a creative career, a personal brand builder, and a legit source of income. With AI tools, new platforms, and endless niches to explore, blogging remains one of the most powerful ways to share knowledge, grow influence, and make money online.",
+    "category": "tech",
+    "tags": [
+      "Blogging",
+      "Public-speaking",
+      "Monetization"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": {},
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "🤖 Life After GPT-5: What’s Next for Generative AI?",
+    "slug": "life-after-gpt-5-whats-next-for-generative-ai",
+    "metaDescription": "GPT-5 has set a new bar for generative AI, but the future is even more exciting. From memory-enabled AI agents to real-time multimodal intelligence, the post-GPT-5 world promises smarter, more collaborative, and decentralized AI systems that will revolutionize the way we work, create, and live.",
+    "category": "tech",
+    "tags": [
+      "GenerativeAI",
+      "GPT5",
+      "AIRevolution",
+      "ArtificialIntelligence",
+      "AIAgents",
+      "MultimodalAI",
+      "OpenSourceAI",
+      "FutureOfAI",
+      "AIin2025",
+      "MachineLearning",
+      "AIInnovation",
+      "AIandHumans",
+      "TechTrends",
+      "AIModels",
+      "AIPrivacy"
+    ],
+    "readTime": "1 min read",
+    "featuredImage": {},
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "🇺🇸 Trump Tariffs: Trade War, Policy Power Play, or Economic Gamble?",
+    "slug": "trump-tariffs-trade-war-policy-power-play-or-economic-gamble",
+    "metaDescription": "Trump’s tariffs redefined America’s trade playbook, sparking a global economic shift. Aimed at protecting U.S. jobs and challenging China, the policy triggered trade wars, price hikes, and mixed results. As tariffs linger in 2025, the debate over protectionism versus free trade continues to shape global markets.",
+    "category": "design",
+    "tags": [],
+    "readTime": "2 min read",
+    "featuredImage": {},
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  },
+  {
+    "title": "🇺🇸 Trump Tariffs: Trade War, Policy Power Play, or Economic Gamble?",
+    "slug": "trump-tariffs-trade-war-policy-power-play-or-economic-gamble-1744694825709",
+    "metaDescription": "Trump’s tariffs redefined America’s trade playbook, sparking a global economic shift. Aimed at protecting U.S. jobs and challenging China, the policy triggered trade wars, price hikes, and mixed results. As tariffs linger in 2025, the debate over protectionism versus free trade continues to shape global markets.",
+    "category": "design",
+    "tags": [],
+    "readTime": "2 min read",
+    "featuredImage": {
+      "url": "https://vwjsevjtpenomupn.public.blob.vercel-storage.com/blog-images/1744694736054-download-rWaeskeJB8HWfWUYQE1ArZmnYbwYEz.jpeg"
+    },
+    "author": {
+      "name": "Anirudh Kulkarni",
+      "avatar": null,
+      "bio": "A passionate developer and tech enthusiast.",
+      "profileLink": "https://anirudh-kulkarni.vercel.app/"
+    }
+  }
+]
