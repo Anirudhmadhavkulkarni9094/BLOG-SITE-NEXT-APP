@@ -1,8 +1,16 @@
 import React from "react";
 
-export const ImageUpload = ({ imageURL, setImageURL, editor }: any) => {
-  const handleImageUpload = async (event:any) => {
-    const file = event.target.files[0];
+interface ImageUploadProps {
+  imageURL: string;
+  setImageURL: (url: string) => void;
+  editor: any; // Replace 'any' with the specific type of your editor if available
+}
+
+export const ImageUpload: React.FC<ImageUploadProps> = ({ imageURL, setImageURL, editor }) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+    const file = files[0];
     if (!file) return;
 
     const formData = new FormData();
